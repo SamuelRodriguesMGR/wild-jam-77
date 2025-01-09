@@ -1,0 +1,10 @@
+{
+	"disabled_build_options": {
+		"openxr": false
+	},
+	"disabled_classes": [
+		"Node2D",
+		"OpenXRCompositionLayer"
+	],
+	"type": "build_profile"
+}
