@@ -13,12 +13,16 @@ config_version=5
 config/name="GodotTemplate"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
-EventBus="*res://scripts/autoload/event_bus.gd"
-Global="*res://scripts/autoload/global.gd"
-SoundManager="*res://scripts/autoload/sound_manager.gd"
-SceneManager="*res://scripts/autoload/scene_manager.gd"
+EventBus="*res://other_scripts/autoload/event_bus.gd"
+Global="*res://other_scripts/autoload/global.gd"
+SoundManager="*res://other_scripts/autoload/sound_manager.gd"
+SceneManager="*res://other_scripts/autoload/scene_manager.gd"
 
 [debug]
 
@@ -38,8 +42,3 @@ window/vsync/vsync_mode=0
 [editor]
 
 naming/script_name_casing=2
-
-[rendering]
-
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
