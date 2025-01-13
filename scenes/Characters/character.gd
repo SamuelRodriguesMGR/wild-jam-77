@@ -1,4 +1,5 @@
 extends CharacterBody3D
+
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var camera: Camera3D = $"Camera3D"
 
