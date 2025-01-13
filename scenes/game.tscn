@@ -1,27 +1,18 @@
 [gd_scene load_steps=2 format=3 uid="uid://h8pf11redc2t"]
 
-[ext_resource type="Script" path="res://other_scripts/game.gd" id="1_1kdwo"]
+[ext_resource type="Script" path="res://scenes/other/server.gd" id="2_e1rkm"]
 
 [node name="Game" type="Node3D"]
-script = ExtResource("1_1kdwo")
 
-[node name="UI" type="Node2D" parent="."]
+[node name="Server" type="Node" parent="."]
+script = ExtResource("2_e1rkm")
 
-[node name="Connect" type="Button" parent="UI"]
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 105.0
-offset_bottom = 45.0
-text = "Connect"
-
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Server"]
 _spawnable_scenes = PackedStringArray("res://scenes/Characters/character.tscn")
-spawn_path = NodePath("..")
+spawn_path = NodePath("../..")
 spawn_limit = 2
 
-[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="Server"]
 _spawnable_scenes = PackedStringArray("res://scenes/level.tscn")
-spawn_path = NodePath("..")
+spawn_path = NodePath("../..")
 spawn_limit = 2
-
-[connection signal="pressed" from="UI/Connect" to="." method="_on_connect_pressed"]

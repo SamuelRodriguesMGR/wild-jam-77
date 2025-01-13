@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://cedfhc5xoqqjv"]
+
+[ext_resource type="Script" path="res://scenes/UI/Main/main.gd" id="1_x7xhc"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x7xhc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.576471, 1, 0.486275, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="HostButton" type="Button" parent="Margin/HBox"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+text = "Создать сервер"
+
+[node name="JoinButton" type="Button" parent="Margin/HBox"]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+text = "Присоединиться"
+
+[node name="IpHost" type="TextEdit" parent="Margin/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 2
+
+[connection signal="pressed" from="Margin/HBox/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="Margin/HBox/JoinButton" to="." method="_on_join_button_pressed"]
