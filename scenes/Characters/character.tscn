@@ -1,24 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b148v0hljqloo"]
+[gd_scene load_steps=16 format=3 uid="uid://b148v0hljqloo"]
 
 [ext_resource type="Script" path="res://scenes/Characters/character.gd" id="1_tyh0l"]
 [ext_resource type="Texture2D" uid="uid://d31vv5nc1v44p" path="res://assets/images/knight.png" id="2_n4r8u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8mgfl"]
-
-[sub_resource type="Animation" id="Animation_hmhuv"]
-resource_name = "up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
 
 [sub_resource type="Animation" id="Animation_k1c36"]
 length = 0.001
@@ -62,36 +47,6 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_4swiv"]
-resource_name = "left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_gf5ga"]
-resource_name = "right"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
 [sub_resource type="Animation" id="Animation_nc45a"]
 resource_name = "idle"
 tracks/0/type = "value"
@@ -107,8 +62,8 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_2ew7g"]
-resource_name = "m_up"
+[sub_resource type="Animation" id="Animation_4swiv"]
+resource_name = "left"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -119,7 +74,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [2]
 }
 
 [sub_resource type="Animation" id="Animation_8tw7l"]
@@ -167,6 +122,51 @@ tracks/0/keys = {
 "values": [7]
 }
 
+[sub_resource type="Animation" id="Animation_2ew7g"]
+resource_name = "m_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_gf5ga"]
+resource_name = "right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_hmhuv"]
+resource_name = "up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_37l81"]
 _data = {
 "RESET": SubResource("Animation_k1c36"),
@@ -181,7 +181,16 @@ _data = {
 "up": SubResource("Animation_hmhuv")
 }
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1qept"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimationPlayer:current_animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Character" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_tyh0l")
 
 [node name="Camera3D" type="Camera3D" parent="."]
@@ -204,3 +213,6 @@ vframes = 4
 libraries = {
 "": SubResource("AnimationLibrary_37l81")
 }
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1qept")

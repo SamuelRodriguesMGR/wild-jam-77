@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1x8bmxo638f"]
+
+[ext_resource type="Material" uid="uid://bivtd880fsqv1" path="res://assets/materials/floor.tres" id="1_esf5u"]
+[ext_resource type="PackedScene" uid="uid://dwb7y5262shkn" path="res://scenes/Characters/dummy.tscn" id="2_52wcd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_daera"]
+
+[sub_resource type="Sky" id="Sky_jtw0a"]
+sky_material = SubResource("ProceduralSkyMaterial_daera")
+
+[sub_resource type="Environment" id="Environment_fcpaf"]
+background_mode = 2
+sky = SubResource("Sky_jtw0a")
+ambient_light_source = 3
+ambient_light_energy = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_25afg"]
+material = ExtResource("1_esf5u")
+size = Vector2(100, 100)
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fcpaf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.642788, -0.541675, 0.541675, 0, 0.707107, 0.707107, -0.766044, -0.454519, 0.454519, 20, 20, 20)
+light_energy = 1.1
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 1.0
+shadow_opacity = 0.5
+shadow_blur = 2.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_25afg")
+skeleton = NodePath("")
+
+[node name="Dummy" parent="." instance=ExtResource("2_52wcd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
