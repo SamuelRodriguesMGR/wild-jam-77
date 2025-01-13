@@ -1,39 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://h8pf11redc2t"]
+[gd_scene load_steps=2 format=3 uid="uid://h8pf11redc2t"]
 
-[ext_resource type="PackedScene" uid="uid://b148v0hljqloo" path="res://scenes/Characters/character.tscn" id="1_80ckw"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nqcok"]
-sky_top_color = Color(0.172549, 0.141176, 0.85098, 1)
-sky_horizon_color = Color(0.172549, 0.419608, 0.85098, 1)
-ground_bottom_color = Color(0.332572, 0.127596, 0.613993, 1)
-ground_horizon_color = Color(0.332572, 0.127596, 0.613993, 1)
-sun_angle_max = 120.0
-
-[sub_resource type="Sky" id="Sky_vsgbd"]
-sky_material = SubResource("ProceduralSkyMaterial_nqcok")
-
-[sub_resource type="Environment" id="Environment_caqg6"]
-background_mode = 2
-background_energy_multiplier = 1.2
-sky = SubResource("Sky_vsgbd")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0gwv"]
-albedo_color = Color(0, 0.286275, 0.615686, 1)
+[ext_resource type="Script" path="res://other_scripts/game.gd" id="1_1kdwo"]
 
 [node name="Game" type="Node3D"]
+script = ExtResource("1_1kdwo")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_caqg6")
+[node name="UI" type="Node2D" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 20, 20, 20)
-light_energy = 1.3
-shadow_enabled = true
+[node name="Connect" type="Button" parent="UI"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 105.0
+offset_bottom = 45.0
+text = "Connect"
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-material_override = SubResource("StandardMaterial3D_m0gwv")
-use_collision = true
-size = Vector3(20, 1, 20)
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/Characters/character.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 2
 
-[node name="Character" parent="." instance=ExtResource("1_80ckw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48172, 0)
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/level.tscn")
+spawn_path = NodePath("..")
+spawn_limit = 2
+
+[connection signal="pressed" from="UI/Connect" to="." method="_on_connect_pressed"]

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bivtd880fsqv1"]
+
+[ext_resource type="Shader" path="res://assets/materials/shaders/floor.gdshader" id="1_u3ega"]
+[ext_resource type="Texture2D" uid="uid://ckfuenqk2s00n" path="res://assets/images/test-grass.png" id="2_q1sjq"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_u3ega")
+shader_parameter/texturemap = ExtResource("2_q1sjq")
