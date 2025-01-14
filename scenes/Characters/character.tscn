@@ -57,6 +57,74 @@ tracks/0/keys = {
 "values": [44, 45, 46, 47, 48, 49, 50, 51]
 }
 
+[sub_resource type="Animation" id="Animation_nc45a"]
+resource_name = "idle_down"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [88, 89, 90, 91, 92]
+}
+
+[sub_resource type="Animation" id="Animation_epdsm"]
+resource_name = "idle_left"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [99, 100, 101, 102, 103]
+}
+
+[sub_resource type="Animation" id="Animation_lf4l4"]
+resource_name = "idle_right"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [110, 111, 112, 113, 114]
+}
+
+[sub_resource type="Animation" id="Animation_22gal"]
+resource_name = "idle_up"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [121, 122, 123, 124, 125]
+}
+
 [sub_resource type="Animation" id="Animation_4swiv"]
 resource_name = "left"
 length = 0.96
@@ -135,108 +203,6 @@ tracks/0/keys = {
 "values": [133]
 }
 
-[sub_resource type="Animation" id="Animation_gf5ga"]
-resource_name = "right"
-length = 0.96
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [66, 67, 68, 69, 70, 71, 72, 73]
-}
-
-[sub_resource type="Animation" id="Animation_hmhuv"]
-resource_name = "up"
-length = 0.96
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [77, 78, 79, 80, 81, 82, 83, 84]
-}
-
-[sub_resource type="Animation" id="Animation_nc45a"]
-resource_name = "idle_down"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [88, 89, 90, 91, 92]
-}
-
-[sub_resource type="Animation" id="Animation_epdsm"]
-resource_name = "idle_left"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [99, 100, 101, 102, 103]
-}
-
-[sub_resource type="Animation" id="Animation_lf4l4"]
-resource_name = "idle_right"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [110, 111, 112, 113, 114]
-}
-
-[sub_resource type="Animation" id="Animation_22gal"]
-resource_name = "idle_up"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [121, 122, 123, 124, 125]
-}
-
 [sub_resource type="Animation" id="Animation_harwx"]
 resource_name = "punch_down"
 length = 0.5
@@ -305,6 +271,40 @@ tracks/0/keys = {
 "values": [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
 }
 
+[sub_resource type="Animation" id="Animation_gf5ga"]
+resource_name = "right"
+length = 0.96
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [66, 67, 68, 69, 70, 71, 72, 73]
+}
+
+[sub_resource type="Animation" id="Animation_hmhuv"]
+resource_name = "up"
+length = 0.96
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [77, 78, 79, 80, 81, 82, 83, 84]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_37l81"]
 _data = {
 "RESET": SubResource("Animation_k1c36"),
@@ -359,8 +359,14 @@ libraries = {
 "": SubResource("AnimationLibrary_37l81")
 }
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.694658, 0.71934, 0, -0.71934, 0.694658, 0, 7.8, 7.15)
+[node name="CameraController" type="Node3D" parent="."]
+top_level = true
+
+[node name="CameraTarget" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/CameraTarget"]
+unique_name_in_owner = true
 fov = 60.0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

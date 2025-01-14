@@ -26,15 +26,6 @@ SoundManager="*res://other_scripts/autoload/sound_manager.gd"
 SceneManager="*res://other_scripts/autoload/scene_manager.gd"
 GlobalVars="*res://scenes/other/global_vars.gd"
 
-[debug]
-
-gdscript/warnings/untyped_declaration=2
-gdscript/warnings/unsafe_property_access=1
-gdscript/warnings/unsafe_method_access=2
-gdscript/warnings/unsafe_cast=2
-gdscript/warnings/unsafe_call_argument=2
-gdscript/warnings/return_value_discarded=1
-
 [display]
 
 window/subwindows/embed_subwindows=false

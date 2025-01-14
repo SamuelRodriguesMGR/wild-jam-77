@@ -9,6 +9,8 @@ var host_ip: String = "localhost"
 const PORT: int = 135
 
 func _ready() -> void:
+	host_ip = GlobalVars.host_ip
+	print(host_ip)
 	
 	if OS.has_feature("dedicated_server"):
 		_run_server()
@@ -21,7 +23,6 @@ func definition_the_role() -> void:
 		_run_server()
 		
 	elif GlobalVars.role_server == "client":
-		host_ip = GlobalVars.host_ip
 		_run_client()
 	
 # хост 

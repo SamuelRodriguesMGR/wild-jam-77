@@ -4,6 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://dwb7y5262shkn" path="res://scenes/Characters/dummy.tscn" id="2_52wcd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_daera"]
+sky_top_color = Color(0, 0.286275, 0.803922, 1)
+sky_horizon_color = Color(0.85098, 0.87451, 0.670588, 1)
+ground_bottom_color = Color(0.1794, 0.38961, 0.78, 1)
+ground_horizon_color = Color(0.85098, 0.87451, 0.670588, 1)
+sun_angle_max = 45.0
 
 [sub_resource type="Sky" id="Sky_jtw0a"]
 sky_material = SubResource("ProceduralSkyMaterial_daera")
