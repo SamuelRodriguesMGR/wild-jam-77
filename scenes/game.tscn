@@ -7,12 +7,12 @@
 [node name="Server" type="Node" parent="."]
 script = ExtResource("2_e1rkm")
 
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Server"]
-_spawnable_scenes = PackedStringArray("res://scenes/Characters/character.tscn")
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="Server"]
+_spawnable_scenes = PackedStringArray("res://scenes/level.tscn")
 spawn_path = NodePath("../..")
 spawn_limit = 2
 
-[node name="LevelSpawner" type="MultiplayerSpawner" parent="Server"]
-_spawnable_scenes = PackedStringArray("res://scenes/level.tscn")
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Server"]
+_spawnable_scenes = PackedStringArray("res://scenes/Characters/character.tscn")
 spawn_path = NodePath("../..")
 spawn_limit = 2
