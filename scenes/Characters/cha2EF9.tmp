@@ -5,25 +5,9 @@
 [ext_resource type="Script" path="res://other_scripts/classes/HurtBox.gd" id="2_uv78p"]
 [ext_resource type="Script" path="res://other_scripts/classes/HitBox.gd" id="3_rghfa"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1qept"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("AnimationPlayer:current_animation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath("Info:text")
-properties/2/spawn = true
-properties/2/replication_mode = 2
-properties/3/path = NodePath("HP:text")
-properties/3/spawn = true
-properties/3/replication_mode = 2
-properties/4/path = NodePath("HitBox/Shape:disabled")
-properties/4/spawn = true
-properties/4/replication_mode = 1
-properties/5/path = NodePath("HitBox:rotation")
-properties/5/spawn = true
-properties/5/replication_mode = 1
+[sub_resource type="BoxShape3D" id="BoxShape3D_oi0bf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8mgfl"]
 
 [sub_resource type="Animation" id="Animation_k1c36"]
 length = 0.001
@@ -201,42 +185,47 @@ _data = {
 "up": SubResource("Animation_hmhuv")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_oi0bf"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8mgfl"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1qept"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimationPlayer:current_animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Info:text")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("HP:text")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="Character" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_tyh0l")
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="attack_duration" type="Timer" parent="Timers"]
-wait_time = 0.3
-one_shot = true
-
-[node name="attack_cooldown" type="Timer" parent="Timers"]
-one_shot = true
-
-[node name="transform_duration" type="Timer" parent="Timers"]
-wait_time = 1.5
-one_shot = true
-
-[node name="transform_cooldown" type="Timer" parent="Timers"]
-wait_time = 4.0
-one_shot = true
-
-[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_1qept")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_37l81")
-}
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.694658, 0.71934, 0, -0.71934, 0.694658, 0, 7.8, 7.15)
 fov = 60.0
+
+[node name="HitBox" type="Area3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, -1.5)
+script = ExtResource("3_rghfa")
+id = null
+damage = null
+
+[node name="Shape" type="CollisionShape3D" parent="HitBox"]
+shape = SubResource("BoxShape3D_oi0bf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HitBox"]
+
+[node name="HurtBox" type="Area3D" parent="."]
+script = ExtResource("2_uv78p")
+
+[node name="Collision" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("CapsuleShape3D_8mgfl")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_8mgfl")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 pixel_size = 0.105
@@ -247,27 +236,13 @@ texture = ExtResource("2_n4r8u")
 hframes = 2
 vframes = 4
 
-[node name="HitBox" type="Area3D" parent="."]
-visible = false
-script = ExtResource("3_rghfa")
-damage = 30
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_37l81")
+}
 
-[node name="Shape" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -1.7)
-shape = SubResource("BoxShape3D_oi0bf")
-disabled = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="HitBox"]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -1.7)
-
-[node name="HurtBox" type="Area3D" parent="."]
-script = ExtResource("2_uv78p")
-
-[node name="Collision" type="CollisionShape3D" parent="HurtBox"]
-shape = SubResource("CapsuleShape3D_8mgfl")
-
-[node name="Collision" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_8mgfl")
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1qept")
 
 [node name="Info" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -282,8 +257,3 @@ modulate = Color(0.803922, 0.152941, 0.12549, 1)
 outline_modulate = Color(0.938919, 0.456999, 0.565816, 1)
 text = "12345"
 font_size = 80
-
-[connection signal="timeout" from="Timers/attack_duration" to="." method="_on_attack_duration_timeout"]
-[connection signal="timeout" from="Timers/attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="timeout" from="Timers/transform_duration" to="." method="_on_transform_duration_timeout"]
-[connection signal="timeout" from="Timers/transform_cooldown" to="." method="_on_transform_cooldown_timeout"]

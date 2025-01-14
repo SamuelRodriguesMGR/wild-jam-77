@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1x8bmxo638f"]
+[gd_scene load_steps=10 format=3 uid="uid://d1x8bmxo638f"]
 
 [ext_resource type="Material" uid="uid://bivtd880fsqv1" path="res://assets/materials/floor.tres" id="1_esf5u"]
 [ext_resource type="PackedScene" uid="uid://dwb7y5262shkn" path="res://scenes/Characters/dummy.tscn" id="2_52wcd"]
@@ -14,9 +14,21 @@ sky = SubResource("Sky_jtw0a")
 ambient_light_source = 3
 ambient_light_energy = 0.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_25afg"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_obd3p"]
 material = ExtResource("1_esf5u")
-size = Vector2(100, 100)
+top_radius = 14.0
+bottom_radius = 14.0
+height = 10.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t1opx"]
+height = 10.0
+radius = 50.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ypfwg"]
+size = Vector3(5, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_806a7"]
+size = Vector3(5, 1, 5)
 
 [node name="Level" type="Node3D"]
 
@@ -32,9 +44,28 @@ shadow_normal_bias = 1.0
 shadow_opacity = 0.5
 shadow_blur = 2.5
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_25afg")
+[node name="platform" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="mesh" type="MeshInstance3D" parent="platform"]
+layers = 2049
+mesh = SubResource("CylinderMesh_obd3p")
 skeleton = NodePath("")
+
+[node name="collision" type="CollisionShape3D" parent="platform"]
+shape = SubResource("CylinderShape3D_t1opx")
+
+[node name="cmouse" type="CollisionShape3D" parent="platform"]
+shape = SubResource("CylinderShape3D_t1opx")
 
 [node name="Dummy" parent="." instance=ExtResource("2_52wcd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+
+[node name="resp_room" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -0.5, -50)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="resp_room"]
+mesh = SubResource("BoxMesh_ypfwg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="resp_room"]
+shape = SubResource("BoxShape3D_806a7")
