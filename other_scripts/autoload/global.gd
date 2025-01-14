@@ -1,5 +1,8 @@
 extends Node
 
+var role_server : String
+var host_ip     : String
+
 func _ready() -> void:
 	Engine.max_fps = 200
 	

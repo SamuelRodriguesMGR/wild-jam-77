@@ -11,15 +11,17 @@ func _ready() -> void:
 	if OS.has_feature("dedicated_server"):
 		_run_server()
 	else:
-		_run_client()
+		definition_the_role()
 		
 # выбор роли
-#func definition_the_role() -> void:
-	#if GlobalVars.role_server == "host":
-		#_run_server()
-		#
-	#elif GlobalVars.role_server == "client":
-		#_run_client()
+func definition_the_role() -> void:
+	if Global.role_server == "host":
+		_run_server()
+		if not OS.has_feature("dedicated_server"):
+			_add_player()
+		
+	elif Global.role_server == "client":
+		_run_client()
 	
 # хост 
 func _run_server() -> void:
@@ -28,11 +30,10 @@ func _run_server() -> void:
 	multiplayer.peer_connected.connect(_add_player)
 	multiplayer.peer_disconnected.connect(_del_player)
 	_add_level()
-	#_add_player()
-
+	
 # клиент
 func _run_client() -> void:
-	HOST_IP = "178.208.94.78"
+	HOST_IP = Global.host_ip
 	peer.create_client(HOST_IP, PORT)
 	multiplayer.multiplayer_peer = peer
 
