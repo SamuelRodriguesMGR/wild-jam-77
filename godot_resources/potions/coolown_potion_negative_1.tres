@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Potion" load_steps=2 format=3 uid="uid://cwurcijbsnpv"]
+
+[ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_ren8n"]
+
+[resource]
+script = ExtResource("2_ren8n")
+potion = 5
+is_positive = null
+quality = null
+is_percents = null
+effect_amount = null
+time_to_use = null

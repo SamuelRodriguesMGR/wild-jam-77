@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://bclg2ap5pes7c"]
+
+[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="1_pgnaa"]
+[ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_dplgy"]
+
+[resource]
+script = ExtResource("2_dplgy")
+potion = 5
+quality = 2
+icon = ExtResource("1_pgnaa")
+is_percents = false
+effect_amount = 0
+time_to_use = 0
