@@ -6,8 +6,12 @@ extends Control
 func _change_scene(role : String) -> void:
 	GlobalVars.role_server = role
 	
-	if not text_ip_host.text:
+	if not text_ip_host.text and role == "client":
+		GlobalVars.host_ip = "178.208.94.78"
+		
+	elif not text_ip_host.text:
 		GlobalVars.host_ip = "localhost"
+		
 	else:
 		GlobalVars.host_ip = text_ip_host.text
 	

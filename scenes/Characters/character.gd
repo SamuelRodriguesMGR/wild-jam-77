@@ -1,13 +1,16 @@
 extends CharacterBody3D
-@onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var camera: Camera3D = $"Camera3D"
-@onready var hitbox: HitBox = $HitBox
-@onready var hitbox_shape: CollisionShape3D = $HitBox/Shape
-@onready var hurtbox_shape: CollisionShape3D = $HurtBox/Collision
-@onready var info_label: Label3D = $Info
-@onready var hp_label: Label3D = $HP
 
-	# таймеры
+
+@onready var anim              : AnimationPlayer = $AnimationPlayer
+@onready var camera            : Camera3D = get_node("%Camera3D")
+@onready var camera_controller : Node3D = get_node("CameraController")
+@onready var hitbox            : HitBox = $HitBox
+@onready var hitbox_shape      : CollisionShape3D = $HitBox/Shape
+@onready var hurtbox_shape     : CollisionShape3D = $HurtBox/Collision
+@onready var info_label        : Label3D = $Info
+@onready var hp_label          : Label3D = $HP
+
+# таймеры
 @onready var attack_cooldown: Timer = $Timers/attack_cooldown
 @onready var attack_duration: Timer = $Timers/attack_duration
 @onready var transform_cooldown: Timer = $Timers/transform_cooldown
@@ -34,7 +37,9 @@ func _ready() -> void:
 		position.y = 1
 
 func _physics_process(_delta: float) -> void:
+	
 	if is_multiplayer_authority():
+
 		# движение
 		if not anim_flag:
 			input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -63,7 +68,10 @@ func _physics_process(_delta: float) -> void:
 			position = Vector3(resp_room.x, position.y, resp_room.y)
 			hp = 100
 		
-	move_and_slide()
+		move_and_slide()
+		
+		# плавная камера
+		camera_controller.position = lerp(camera_controller.position, position, 0.05)
 
 
 # пользовательские функции
@@ -152,7 +160,7 @@ func mov_anim() -> void:
 			anim.play("m_down")
 	last_dir = input_dir
 	# позиция мышки в 3д
-func _get_mouse_position(cmask: int) -> Vector3:
+func _get_mouse_position(_cmask: int) -> Vector3:
 	var mpos: Vector2 = get_viewport().get_mouse_position()
 	var rS: Vector3 = camera.project_ray_origin(mpos)
 	var rE: Vector3 = rS + camera.project_ray_normal(mpos) * 2000
