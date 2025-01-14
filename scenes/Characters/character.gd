@@ -16,8 +16,10 @@ extends CharacterBody3D
 const SPEED: float = 6.0
 var hp: int = 100
 var input_dir: Vector2
+var last_dir: Vector2 = Vector2(0,1)
 var transform_bonus: Vector2 = Vector2(0,0) # speed bonus and transform state
 var resp_room: Vector2 = Vector2(50, -50)
+var anim_flag: bool = false
 
 var is_attack_ready:bool = true
 var is_transform_ready:bool = true
@@ -34,15 +36,18 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if is_multiplayer_authority():
 		# движение
-		input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		if not anim_flag:
+			input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+			mov_anim()
+		else:
+			input_dir = Vector2(0,0)
 		var mov_dir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if mov_dir:
 			velocity.x = mov_dir.x * (SPEED + transform_bonus.x)
 			velocity.z = mov_dir.z * (SPEED + transform_bonus.x)
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED/10)
-			velocity.z = move_toward(velocity.z, 0, SPEED/10)
-		mov_anim()
+			velocity.x = move_toward(velocity.x, 0, SPEED/5)
+			velocity.z = move_toward(velocity.z, 0, SPEED/5)
 
 		# обработка ивентов с кд
 		if Input.is_action_pressed("transform") and is_transform_ready:
@@ -56,6 +61,7 @@ func _physics_process(_delta: float) -> void:
 		
 		if hp <= 0:
 			position = Vector3(resp_room.x, position.y, resp_room.y)
+			hp = 100
 		
 	move_and_slide()
 
@@ -72,14 +78,31 @@ func attack_handler() -> void:
 	if transform_bonus.y == 0:
 		var pos: Vector3 = _get_mouse_position(collision_mask)
 		hitbox.look_at(Vector3(pos.x, position.y, pos.z), Vector3(0,1,0))
+		print()
 		is_attack_ready = false
-		hitbox.visible = true
+		anim_flag = true
+		#hitbox.visible = true
 		hitbox_shape.disabled = false
 		attack_duration.start()
-		attack_cooldown.start()	
+		attack_cooldown.start()
+		var punch_anim: StringName
+		if hitbox.rotation_degrees.y < -40 and hitbox.rotation_degrees.y > -140:
+			punch_anim = "punch_right"
+		if hitbox.rotation_degrees.y > 40 and hitbox.rotation_degrees.y < 140:
+			punch_anim = "punch_left"
+		if hitbox.rotation_degrees.y >= 140 or hitbox.rotation_degrees.y <= -140:
+			punch_anim = "punch_down"
+		if hitbox.rotation_degrees.y >= -40 and hitbox.rotation_degrees.y <= 40:
+			punch_anim = "punch_up"
+		anim.play(punch_anim)
+		# не включать mov_anim в process, он будет прерывать await и он не сработает
+		await anim.animation_finished
+
+		
 func _on_attack_duration_timeout() -> void:
-	hitbox.visible = false
+	#hitbox.visible = false
 	hitbox_shape.disabled = true
+	anim_flag = false
 func _on_attack_cooldown_timeout() -> void:
 	is_attack_ready = true
 
@@ -99,20 +122,27 @@ func _on_transform_cooldown_timeout() -> void:
 	# анимация движения
 func mov_anim() -> void:
 	if transform_bonus.y == 0:
-		if input_dir.x > 0:
+		if input_dir.x > 0 and input_dir.y == 0:
 			anim.play("right")
-		if input_dir.x < 0:
+		if input_dir.x < 0 and input_dir.y == 0:
 			anim.play("left")
 		if input_dir.y > 0:
 			anim.play("down")
 		if input_dir.y < 0:
 			anim.play("up")
 		if input_dir.x == 0 and input_dir.y == 0:
-			anim.play("idle")
+			if last_dir.x > 0:
+				anim.play("idle_right")
+			if last_dir.x < 0:
+				anim.play("idle_left")
+			if last_dir.y > 0:
+				anim.play("idle_down")
+			if last_dir.y < 0:
+				anim.play("idle_up")
 	else:
-		if input_dir.x > 0:
+		if input_dir.x > 0 and input_dir.y == 0:
 			anim.play("m_right")
-		if input_dir.x < 0:
+		if input_dir.x < 0 and input_dir.y == 0:
 			anim.play("m_left")
 		if input_dir.y > 0:
 			anim.play("m_down")
@@ -120,7 +150,7 @@ func mov_anim() -> void:
 			anim.play("m_up")
 		if input_dir.x == 0 and input_dir.y == 0:
 			anim.play("m_down")
-
+	last_dir = input_dir
 	# позиция мышки в 3д
 func _get_mouse_position(cmask: int) -> Vector3:
 	var mpos: Vector2 = get_viewport().get_mouse_position()
