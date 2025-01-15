@@ -1,20 +1,11 @@
 extends Control
 
 
-@onready var text_ip_host : TextEdit = get_node("%IpHost")
+@onready var text_ip : TextEdit = get_node("%TextIP")
 
 func _change_scene(role : String) -> void:
-	GlobalVars.role_server = role
-	
-	if not text_ip_host.text and role == "client":
-		GlobalVars.host_ip = "178.208.94.78"
-		
-	elif not text_ip_host.text:
-		GlobalVars.host_ip = "localhost"
-		
-	else:
-		GlobalVars.host_ip = text_ip_host.text
-	
+	Global.role_server = role
+	Global.host_ip     = text_ip.text
 	get_tree().change_scene_to_file("res://scenes/game.tscn")
 	
 # Host
