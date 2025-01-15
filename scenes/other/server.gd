@@ -5,7 +5,7 @@ var peer: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 @export var level_scene : PackedScene = preload("res://scenes/level.tscn")
 
 var HOST_IP : String = "localhost"
-const PORT: int = 135
+const PORT: int = 22
 
 func _ready() -> void:
 	if OS.has_feature("dedicated_server"):
@@ -25,7 +25,7 @@ func definition_the_role() -> void:
 	
 # хост 
 func _run_server() -> void:
-	peer.create_server(135)
+	peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_add_player)
 	multiplayer.peer_disconnected.connect(_del_player)
