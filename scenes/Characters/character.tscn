@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://b148v0hljqloo"]
+[gd_scene load_steps=27 format=3 uid="uid://b148v0hljqloo"]
 
 [ext_resource type="Script" path="res://scenes/Characters/character.gd" id="1_tyh0l"]
 [ext_resource type="Texture2D" uid="uid://cthqhwhjx6enb" path="res://assets/Character/spritesheet.png" id="2_aodx6"]
+[ext_resource type="Script" path="res://scenes/Characters/super_camera_3d.gd" id="2_qpnry"]
 [ext_resource type="Script" path="res://other_scripts/classes/HurtBox.gd" id="2_uv78p"]
 [ext_resource type="Script" path="res://other_scripts/classes/HitBox.gd" id="3_rghfa"]
 
@@ -361,6 +362,7 @@ libraries = {
 
 [node name="CameraController" type="Node3D" parent="."]
 top_level = true
+script = ExtResource("2_qpnry")
 
 [node name="CameraTarget" type="Node3D" parent="CameraController"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)

@@ -7,7 +7,7 @@ var bodies: Array[Node3D]
 func _init() -> void:
 	collision_mask = 2
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	bodies =  area.get_overlapping_bodies()
 	if bodies != [] and Input.is_action_just_pressed("interact"):
 		for body in bodies:

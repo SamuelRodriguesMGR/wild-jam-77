@@ -1,0 +1,421 @@
+[gd_scene load_steps=26 format=3 uid="uid://b148v0hljqloo"]
+
+[ext_resource type="Script" path="res://scenes/Characters/character.gd" id="1_tyh0l"]
+[ext_resource type="Texture2D" uid="uid://cthqhwhjx6enb" path="res://assets/Character/spritesheet.png" id="2_aodx6"]
+[ext_resource type="Script" path="res://other_scripts/classes/HurtBox.gd" id="2_uv78p"]
+[ext_resource type="Script" path="res://other_scripts/classes/HitBox.gd" id="3_rghfa"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1qept"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimationPlayer:current_animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Info:text")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath("HP:text")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath("HitBox/Shape:disabled")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("HitBox:rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
+[sub_resource type="Animation" id="Animation_k1c36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_qdtjp"]
+resource_name = "down"
+length = 0.96
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [44, 45, 46, 47, 48, 49, 50, 51]
+}
+
+[sub_resource type="Animation" id="Animation_nc45a"]
+resource_name = "idle_down"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [88, 89, 90, 91, 92]
+}
+
+[sub_resource type="Animation" id="Animation_epdsm"]
+resource_name = "idle_left"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [99, 100, 101, 102, 103]
+}
+
+[sub_resource type="Animation" id="Animation_lf4l4"]
+resource_name = "idle_right"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [110, 111, 112, 113, 114]
+}
+
+[sub_resource type="Animation" id="Animation_22gal"]
+resource_name = "idle_up"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.48, 0.72, 0.96),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [121, 122, 123, 124, 125]
+}
+
+[sub_resource type="Animation" id="Animation_4swiv"]
+resource_name = "left"
+length = 0.96
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [55, 56, 57, 58, 59, 60, 61, 62]
+}
+
+[sub_resource type="Animation" id="Animation_8tw7l"]
+resource_name = "m_down"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [132]
+}
+
+[sub_resource type="Animation" id="Animation_qw081"]
+resource_name = "m_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [143]
+}
+
+[sub_resource type="Animation" id="Animation_lwhip"]
+resource_name = "m_right"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [144]
+}
+
+[sub_resource type="Animation" id="Animation_2ew7g"]
+resource_name = "m_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [133]
+}
+
+[sub_resource type="Animation" id="Animation_harwx"]
+resource_name = "punch_down"
+length = 0.5
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_6k2lv"]
+resource_name = "punch_left"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="Animation" id="Animation_pw0bo"]
+resource_name = "punch_right"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26, 27, 28, 29, 30]
+}
+
+[sub_resource type="Animation" id="Animation_eg4u6"]
+resource_name = "punch_up"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
+}
+
+[sub_resource type="Animation" id="Animation_gf5ga"]
+resource_name = "right"
+length = 0.96
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [66, 67, 68, 69, 70, 71, 72, 73]
+}
+
+[sub_resource type="Animation" id="Animation_hmhuv"]
+resource_name = "up"
+length = 0.96
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [77, 78, 79, 80, 81, 82, 83, 84]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_37l81"]
+_data = {
+"RESET": SubResource("Animation_k1c36"),
+"down": SubResource("Animation_qdtjp"),
+"idle_down": SubResource("Animation_nc45a"),
+"idle_left": SubResource("Animation_epdsm"),
+"idle_right": SubResource("Animation_lf4l4"),
+"idle_up": SubResource("Animation_22gal"),
+"left": SubResource("Animation_4swiv"),
+"m_down": SubResource("Animation_8tw7l"),
+"m_left": SubResource("Animation_qw081"),
+"m_right": SubResource("Animation_lwhip"),
+"m_up": SubResource("Animation_2ew7g"),
+"punch_down": SubResource("Animation_harwx"),
+"punch_left": SubResource("Animation_6k2lv"),
+"punch_right": SubResource("Animation_pw0bo"),
+"punch_up": SubResource("Animation_eg4u6"),
+"right": SubResource("Animation_gf5ga"),
+"up": SubResource("Animation_hmhuv")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oi0bf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8mgfl"]
+
+[node name="Character" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_tyh0l")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="attack_duration" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="attack_cooldown" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="transform_duration" type="Timer" parent="Timers"]
+wait_time = 1.5
+one_shot = true
+
+[node name="transform_cooldown" type="Timer" parent="Timers"]
+wait_time = 4.0
+one_shot = true
+
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1qept")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_37l81")
+}
+
+[node name="CameraController" type="Node3D" parent="."]
+top_level = true
+
+[node name="CameraTarget" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController/CameraTarget"]
+unique_name_in_owner = true
+fov = 60.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.105
+billboard = 1
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("2_aodx6")
+hframes = 11
+vframes = 14
+frame = 1
+
+[node name="HitBox" type="Area3D" parent="."]
+visible = false
+script = ExtResource("3_rghfa")
+damage = 30
+
+[node name="Shape" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -1.7)
+shape = SubResource("BoxShape3D_oi0bf")
+disabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HitBox"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -1.7)
+
+[node name="HurtBox" type="Area3D" parent="."]
+script = ExtResource("2_uv78p")
+
+[node name="Collision" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("CapsuleShape3D_8mgfl")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_8mgfl")
+
+[node name="Info" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+text = "12345"
+font_size = 80
+
+[node name="HP" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+billboard = 1
+modulate = Color(0.803922, 0.152941, 0.12549, 1)
+outline_modulate = Color(0.938919, 0.456999, 0.565816, 1)
+text = "12345"
+font_size = 80
+
+[connection signal="timeout" from="Timers/attack_duration" to="." method="_on_attack_duration_timeout"]
+[connection signal="timeout" from="Timers/attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="Timers/transform_duration" to="." method="_on_transform_duration_timeout"]
+[connection signal="timeout" from="Timers/transform_cooldown" to="." method="_on_transform_cooldown_timeout"]

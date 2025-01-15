@@ -11,23 +11,24 @@ extends CharacterBody3D
 @onready var hp_label          : Label3D = $HP
 
 # таймеры
-@onready var attack_cooldown: Timer = $Timers/attack_cooldown
-@onready var attack_duration: Timer = $Timers/attack_duration
-@onready var transform_cooldown: Timer = $Timers/transform_cooldown
-@onready var transform_duration: Timer = $Timers/transform_duration
+@onready var attack_cooldown    : Timer = $Timers/attack_cooldown
+@onready var attack_duration    : Timer = $Timers/attack_duration
+@onready var transform_cooldown : Timer = $Timers/transform_cooldown
+@onready var transform_duration : Timer = $Timers/transform_duration
 
-@export var gold: int = 3
+@export var gold             : int = 3
 
-const SPEED: float = 12.0
-var hp: int = 100
-var input_dir: Vector2
-var last_dir: Vector2 = Vector2(0,1)
-var transform_bonus: Vector2 = Vector2(0,0) # speed bonus and transform state
-var resp_room: Vector2 = Vector2(50, -50)
-var anim_flag: bool = false
+const SPEED         : float = 12.0
 
-var is_attack_ready:bool = true
-var is_transform_ready:bool = true
+var hp              : int = 100
+var input_dir       : Vector2
+var last_dir        : Vector2 = Vector2(0,1)
+var transform_bonus : Vector2 = Vector2(0,0) # speed bonus and transform state
+var resp_room       : Vector2 = Vector2(50, -50)
+var anim_flag       : bool = false
+
+var is_attack_ready    : bool = true
+var is_transform_ready : bool = true
 
 
 func _enter_tree() -> void:
@@ -44,11 +45,11 @@ func _physics_process(_delta: float) -> void:
 
 		# движение
 		if not anim_flag:
-			input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+			input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") 
 			mov_anim()
 		else:
-			input_dir = Vector2(0,0)
-		var mov_dir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+			input_dir = Vector2.ZERO
+		var mov_dir := (camera_controller.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized() 
 		if mov_dir:
 			velocity.x = mov_dir.x * (SPEED + transform_bonus.x)
 			velocity.z = mov_dir.z * (SPEED + transform_bonus.x)
@@ -59,6 +60,7 @@ func _physics_process(_delta: float) -> void:
 		# обработка ивентов с кд
 		if Input.is_action_pressed("transform") and is_transform_ready:
 			transformation_handler()
+			
 		if Input.is_action_pressed("attack") and is_attack_ready:
 			attack_handler()
 		
@@ -71,10 +73,6 @@ func _physics_process(_delta: float) -> void:
 			hp = 100
 		
 		move_and_slide()
-		
-		# плавная камера
-		camera_controller.position = lerp(camera_controller.position, position, 0.05)
-
 
 # пользовательские функции
 
@@ -86,24 +84,31 @@ func TakeDamage(damage: int) -> void:
 	# обработка атаки
 func attack_handler() -> void:
 	if transform_bonus.y == 0:
-		var pos: Vector3 = _get_mouse_position(collision_mask)
-		hitbox.look_at(Vector3(pos.x, position.y, pos.z), Vector3(0,1,0))
-		print()
+		#hitbox.rotation.y = camera_controller.rotation.y 
+		
 		is_attack_ready = false
 		anim_flag = true
-		#hitbox.visible = true
+		hitbox.visible = true
 		hitbox_shape.disabled = false
 		attack_duration.start()
 		attack_cooldown.start()
+		
 		var punch_anim: StringName
-		if hitbox.rotation_degrees.y < -40 and hitbox.rotation_degrees.y > -140:
+		hitbox.rotation_degrees.y = camera_controller.rotation_degrees.y
+		
+		if input_dir.x > 0 and input_dir.y == 0:
 			punch_anim = "punch_right"
-		if hitbox.rotation_degrees.y > 40 and hitbox.rotation_degrees.y < 140:
+			hitbox.rotation_degrees.y -= 90
+		if input_dir.x < 0 and input_dir.y == 0:
 			punch_anim = "punch_left"
-		if hitbox.rotation_degrees.y >= 140 or hitbox.rotation_degrees.y <= -140:
+			hitbox.rotation_degrees.y += 90
+		if input_dir.y > 0:
 			punch_anim = "punch_down"
-		if hitbox.rotation_degrees.y >= -40 and hitbox.rotation_degrees.y <= 40:
+			hitbox.rotation_degrees.y += 180
+		if last_dir.y < 0:
 			punch_anim = "punch_up"
+			
+			
 		anim.play(punch_anim)
 		# не включать mov_anim в process, он будет прерывать await и он не сработает
 		await anim.animation_finished
