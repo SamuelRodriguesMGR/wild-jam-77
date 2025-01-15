@@ -16,6 +16,8 @@ extends CharacterBody3D
 @onready var transform_cooldown: Timer = $Timers/transform_cooldown
 @onready var transform_duration: Timer = $Timers/transform_duration
 
+@export var gold: int = 3
+
 const SPEED: float = 12.0
 var hp: int = 100
 var input_dir: Vector2

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1x8bmxo638f"]
+[gd_scene load_steps=11 format=3 uid="uid://d1x8bmxo638f"]
 
 [ext_resource type="Material" uid="uid://bivtd880fsqv1" path="res://assets/materials/floor.tres" id="1_esf5u"]
 [ext_resource type="PackedScene" uid="uid://dwb7y5262shkn" path="res://scenes/Characters/dummy.tscn" id="2_52wcd"]
+[ext_resource type="PackedScene" uid="uid://bsh7snhq88udy" path="res://scenes/other/vending.tscn" id="3_1s1lr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_daera"]
 sky_top_color = Color(0, 0.286275, 0.803922, 1)
@@ -64,7 +65,10 @@ shape = SubResource("CylinderShape3D_t1opx")
 shape = SubResource("CylinderShape3D_t1opx")
 
 [node name="Dummy" parent="." instance=ExtResource("2_52wcd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -5)
+
+[node name="Vending" parent="." instance=ExtResource("3_1s1lr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -5)
 
 [node name="resp_room" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -0.5, -50)
