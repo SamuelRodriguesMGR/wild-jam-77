@@ -9,6 +9,8 @@ extends CharacterBody3D
 @onready var hurtbox_shape     : CollisionShape3D = $HurtBox/Collision
 @onready var info_label        : Label3D = $Info
 @onready var hp_label          : Label3D = $HP
+@onready var potion_slots_ui   : PotionSlotsUI = $PotionSlotsUI
+
 
 # таймеры
 @onready var attack_cooldown: Timer = $Timers/attack_cooldown
@@ -27,6 +29,7 @@ var anim_flag: bool = false
 var is_attack_ready:bool = true
 var is_transform_ready:bool = true
 
+var _potions_slots: PotionSlots
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
@@ -35,6 +38,7 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		camera.make_current()
 		position.y = 1
+	_init_potions_slots()
 
 func _physics_process(_delta: float) -> void:
 	
@@ -172,30 +176,7 @@ func _get_mouse_position(_cmask: int) -> Vector3:
 	else:
 		return Vector3(0,0,0)
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+func _init_potions_slots() -> void:
+	_potions_slots = PotionSlots.new()
+	_potions_slots.potion_slots_updated.connect(potion_slots_ui._on_potion_slots_updated)
+	_potions_slots.potion_slots_updated.emit(_potions_slots.potions)

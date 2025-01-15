@@ -15,6 +15,8 @@ func _init() -> void:
 		_slots_size = 2
 	for i: int in _slots_size:
 		potions.append(null_potion)
+
+func _ready() -> void:
 	potion_slots_updated.emit(potions)
 
 func put_potion_in(potion: Potion) -> void:
