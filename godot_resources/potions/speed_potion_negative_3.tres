@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_j4hxh"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_j4hxh")
 potion = 1
 quality = 3

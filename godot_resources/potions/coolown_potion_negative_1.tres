@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Potion" load_steps=2 format=3 uid="uid://cwurcijbsnpv"]
+[gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://cwurcijbsnpv"]
 
+[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="1_6ukja"]
 [ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_ren8n"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_ren8n")
 potion = 5
-is_positive = null
 quality = null
+icon = ExtResource("1_6ukja")
 is_percents = null
 effect_amount = null
 time_to_use = null
