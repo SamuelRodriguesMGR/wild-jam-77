@@ -35,6 +35,7 @@ func _run_server() -> void:
 func _run_client() -> void:
 	HOST_IP = Global.host_ip
 	peer.create_client(HOST_IP, PORT)
+	print(HOST_IP)
 	multiplayer.multiplayer_peer = peer
 
 # добавление игрока

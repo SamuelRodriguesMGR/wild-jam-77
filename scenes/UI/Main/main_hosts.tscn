@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://bhffgt4d668xn"]
+
+[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="1_c3xns"]
+[ext_resource type="Script" path="res://scenes/UI/Main/main_hosts.gd" id="1_rwlsb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjgct"]
+bg_color = Color(0.13, 0.13, 0.13, 0.572549)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1sfb"]
+atlas = ExtResource("1_c3xns")
+region = Rect2(0, 0, 17, 0)
+
+[node name="main_hosts" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rwlsb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0431373, 0.0666667, 0.721569, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBox"]
+custom_minimum_size = Vector2(400, 60)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wjgct")
+text = " > Введите название своей арены"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBox/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button" type="Button" parent="VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_icons/icon = SubResource("AtlasTexture_b1sfb")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="VBox/HBox/Button" to="." method="_on_button_pressed"]

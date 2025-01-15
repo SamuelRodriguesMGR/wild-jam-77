@@ -88,7 +88,7 @@ func attack_handler() -> void:
 		
 		is_attack_ready = false
 		anim_flag = true
-		hitbox.visible = true
+		#hitbox.visible = true
 		hitbox_shape.disabled = false
 		attack_duration.start()
 		attack_cooldown.start()
