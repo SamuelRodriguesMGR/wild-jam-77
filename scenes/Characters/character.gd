@@ -180,3 +180,7 @@ func _init_potions_slots() -> void:
 	_potions_slots = PotionSlots.new()
 	_potions_slots.potion_slots_updated.connect(potion_slots_ui._on_potion_slots_updated)
 	_potions_slots.potion_slots_updated.emit(_potions_slots.potions)
+
+##Example of use: give_potion("res://godot_resources/potions/coolown_potion_negative_2.tres")
+func give_potion(potion: Potion) -> void:
+	_potions_slots.put_potion_in(potion)
