@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://b627l6xs8yw6u"]
+
+[ext_resource type="Script" path="res://scenes/UI/potions_slots/potion_slot.gd" id="1_qs4do"]
+[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="2_tmcrl"]
+
+[node name="PotionSlot" type="AspectRatioContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_qs4do")
+
+[node name="SlotStructure" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TimerTime" type="Label" parent="SlotStructure"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 66
+text = "15"
+
+[node name="PotionTexture" type="TextureRect" parent="SlotStructure"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_tmcrl")
+expand_mode = 1
+stretch_mode = 5
