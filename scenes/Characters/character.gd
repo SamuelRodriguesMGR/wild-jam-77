@@ -26,12 +26,12 @@ extends CharacterBody3D
 const SPEED    : float = 12.0
 const FRICTION : float = 0.95
 
-var hp              : int = 100
-var move_direction  : Vector2 = Vector2.ZERO
-var last_dir        : Vector2 = Vector2.UP
-var transform_bonus : Vector2 = Vector2.ZERO # speed bonus and transform state
-var resp_room       : Vector2 = Vector2(50, -50)
-var anim_flag       : bool    = false
+var hp                  : int = 100
+var move_direction      : Vector2 = Vector2.ZERO
+var last_move_direction : Vector2 = Vector2.UP
+var transform_bonus     : Vector2 = Vector2.ZERO # speed bonus and transform state
+var resp_room           : Vector2 = Vector2(50, -50)
+var anim_flag           : bool    = false
 
 var is_attack_ready    : bool = true
 var is_transform_ready : bool = true
@@ -106,11 +106,9 @@ func TakeDamage(damage : int) -> void:
 # обработка атаки
 func attack_handler() -> void:
 	if transform_bonus.y == 0:
-		#hitbox.rotation.y = camera_controller.rotation.y 
-		
 		is_attack_ready = false
 		anim_flag = true
-		#hitbox.visible = true
+		hitbox.visible = true
 		hitbox_shape.disabled = false
 		attack_duration.start()
 		attack_cooldown.start()
@@ -118,16 +116,16 @@ func attack_handler() -> void:
 		var punch_anim: StringName
 		hitbox.rotation_degrees.y = camera_controller.rotation_degrees.y
 		
-		if move_direction.x > 0 and move_direction.y == 0:
+		if last_move_direction.x > 0 and last_move_direction.y == 0:
 			punch_anim = "punch_right"
 			hitbox.rotation_degrees.y -= 90
-		if move_direction.x < 0 and move_direction.y == 0:
+		if last_move_direction.x < 0 and last_move_direction.y == 0:
 			punch_anim = "punch_left"
 			hitbox.rotation_degrees.y += 90
-		if move_direction.y > 0:
+		if last_move_direction.y > 0:
 			punch_anim = "punch_down"
 			hitbox.rotation_degrees.y += 180
-		if last_dir.y < 0:
+		if last_move_direction.y < 0:
 			punch_anim = "punch_up"
 			
 			
@@ -169,13 +167,13 @@ func mov_anim() -> void:
 		if move_direction.y < 0:
 			anim.play("up")
 		if move_direction.x == 0 and move_direction.y == 0:
-			if last_dir.x > 0:
+			if last_move_direction.x > 0:
 				anim.play("idle_right")
-			if last_dir.x < 0:
+			if last_move_direction.x < 0:
 				anim.play("idle_left")
-			if last_dir.y > 0:
+			if last_move_direction.y > 0:
 				anim.play("idle_down")
-			if last_dir.y < 0:
+			if last_move_direction.y < 0:
 				anim.play("idle_up")
 	else:
 		if move_direction.x > 0 and move_direction.y == 0:
@@ -188,7 +186,9 @@ func mov_anim() -> void:
 			anim.play("m_up")
 		if move_direction.x == 0 and move_direction.y == 0:
 			anim.play("m_down")
-	last_dir = move_direction
+			
+	if move_direction != Vector2.ZERO:
+		last_move_direction = move_direction
 	
 	
 ## позиция мышки в 3д

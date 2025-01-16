@@ -94,7 +94,7 @@ func _ready() -> void:
 	vending_diegetic_ui.update_state(_calculate_chance(),_current_quality,_current_quality + 1,_gold_to_level_up_vending)
 	_interacted_player = null
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(_is_turned_on):
 		bodies =  area.get_overlapping_bodies()
 		_handle_spending_gold()
