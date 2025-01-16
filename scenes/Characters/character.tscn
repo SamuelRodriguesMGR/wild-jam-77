@@ -335,6 +335,8 @@ properties/5/replication_mode = 1
 [node name="Character" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_tyh0l")
+gold = null
+is_local = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

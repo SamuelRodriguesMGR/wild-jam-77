@@ -322,12 +322,11 @@ func _on_potion_is_used(potion: Potion) -> void:
 			hp -= potion.effect_amount
 		print("New hp: ", hp)
 	elif potion.potion == Potion.potion_type.POWER_SLASH:
-		pass
+		print("Power Slash drinked")
 	elif potion.potion == Potion.potion_type.SLOW_SLASH:
-		pass
+		print("Slow Slash drinked")
 	else:
 		pass
-	potion.potion_is_used.disconnect(_on_potion_is_used)
 
 func _on_potion_ended(potion: Potion, reverse_effect_amount: int) -> void:
 	var speed: int = 10
@@ -350,12 +349,11 @@ func _on_potion_ended(potion: Potion, reverse_effect_amount: int) -> void:
 	elif potion.potion == Potion.potion_type.COOLDOWN_NEGATIVE:
 		coold_down-=reverse_effect_amount
 	elif potion.potion == Potion.potion_type.POWER_SLASH:
-		pass
+		print("Slash ended")
 	elif potion.potion == Potion.potion_type.SLOW_SLASH:
-		pass
+		print("Slash drinked")
 	else:
 		pass
-	potion.potion_ended.disconnect(_on_potion_ended)
 
 #Функция такая маленькая, потому что можно будет включать VFX.
 func put_out_gold(minus: int) -> bool:
