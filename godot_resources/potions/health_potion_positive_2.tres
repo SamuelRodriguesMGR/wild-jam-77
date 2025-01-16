@@ -11,4 +11,4 @@ quality = 2
 icon = ExtResource("1_ekf27")
 is_percents = false
 effect_amount = 333
-time_to_use = 6
+time_to_use = 2

@@ -49,5 +49,5 @@ func _get_first_key_string_for_action(action_name: String) -> String:
 	var actions: Array[StringName] = InputMap.get_actions()
 	for i: StringName in actions:
 		if(i == action_name):
-			return "\"" + InputMap.action_get_events(i)[0].as_text() + "\""
+			return "\"" + InputMap.action_get_events(i)[0].as_text()[0] + "\""
 	return "Error InputMapping get_first_key_string_for_action"

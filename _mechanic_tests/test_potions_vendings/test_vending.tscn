@@ -55,6 +55,7 @@ shadow_blur = 2.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 
 [node name="mesh" type="MeshInstance3D" parent="platform"]
+transform = Transform3D(0.998223, 0.00293594, 0.0012874, -0.000357875, 8.22069, 0.00105319, -0.0012781, -0.00861707, 1.00519, 0, -36.0304, 0)
 layers = 2049
 mesh = SubResource("CylinderMesh_obd3p")
 skeleton = NodePath("")
@@ -82,5 +83,5 @@ shape = SubResource("BoxShape3D_806a7")
 
 [node name="Character" parent="." instance=ExtResource("4_mvg1i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16966, 0)
-gold = 6
+gold = 2616
 is_local = true

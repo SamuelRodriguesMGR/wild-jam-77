@@ -67,9 +67,12 @@ func _physics_process(_delta: float) -> void:
 		# обработка ивентов с атакой
 		if Input.is_action_pressed("transform") and is_transform_ready:
 			transformation_handler()
-			
+
 		if Input.is_action_pressed("attack") and is_attack_ready:
 			attack_handler()
+
+		if Input.is_action_just_pressed("drink_potion"):
+			_potions_slots.drink_potion()
 		
 		# жизни
 		hp_label.text = str(hp)
@@ -225,6 +228,7 @@ func _on_potion_is_used(potion: Potion) -> void:
 	var plus_damage_to_next_attack: bool = false
 	var slow_play_to_next_attack: bool = false
 	if potion.potion == Potion.potion_type.SPEED_POSITIVE:
+		print("Old speed: ", speed)
 		var reverse_effect_amount: int = 0
 		if(potion.is_percents):
 			reverse_effect_amount = speed*(potion.effect_amount/100 +1)
@@ -232,9 +236,12 @@ func _on_potion_is_used(potion: Potion) -> void:
 		else:
 			reverse_effect_amount = potion.effect_amount
 			speed+=potion.effect_amount
+		print("New speed: ", speed)
+		print("Speed Positive is drinked")
 		await get_tree().create_timer(potion.time_to_use).timeout
 		potion.potion_ended.emit(potion, reverse_effect_amount)
 	elif potion.potion == Potion.potion_type.SPEED_NEGATIVE:
+		print("Old speed: ", speed)
 		var reverse_effect_amount: int = 0
 		if(potion.is_percents):
 			reverse_effect_amount = speed*(potion.effect_amount/100 +1)
@@ -242,9 +249,12 @@ func _on_potion_is_used(potion: Potion) -> void:
 		else:
 			reverse_effect_amount = potion.effect_amount
 			speed-=potion.effect_amount
+		print("New speed: ", speed)
+		print("Speed negative is drinked")
 		await get_tree().create_timer(potion.time_to_use).timeout
 		potion.potion_ended.emit(potion, reverse_effect_amount)
 	elif potion.potion == Potion.potion_type.POWER_POSITIVE:
+		print("Old damage: ", attack_damage)
 		var reverse_effect_amount: int = 0
 		if(potion.is_percents):
 			reverse_effect_amount = attack_damage*(potion.effect_amount/100 +1)
@@ -252,9 +262,12 @@ func _on_potion_is_used(potion: Potion) -> void:
 		else:
 			reverse_effect_amount = potion.effect_amount
 			attack_damage+=potion.effect_amount
+		print("New damage: ", attack_damage)
+		print("Damage Positive is drinked")
 		await get_tree().create_timer(potion.time_to_use).timeout
 		potion.potion_ended.emit(potion, reverse_effect_amount)
 	elif potion.potion == Potion.potion_type.POWER_NEGATIVE:
+		print("Old damage: ", attack_damage)
 		var reverse_effect_amount: int = 0
 		if(potion.is_percents):
 			reverse_effect_amount = attack_damage*(potion.effect_amount/100 +1)
@@ -262,9 +275,12 @@ func _on_potion_is_used(potion: Potion) -> void:
 		else:
 			reverse_effect_amount = potion.effect_amount
 			attack_damage-=potion.effect_amount
+		print("New damage: ", attack_damage)
+		print("Damage Negative is drinked")
 		await get_tree().create_timer(potion.time_to_use).timeout
 		potion.potion_ended.emit(potion, reverse_effect_amount)
 	elif potion.potion == Potion.potion_type.COOLDOWN_POSITIVE:
+		print("Old cooldown: ", coold_down)
 		var reverse_effect_amount: int = 0
 		if(potion.is_percents):
 			reverse_effect_amount = coold_down
@@ -274,9 +290,12 @@ func _on_potion_is_used(potion: Potion) -> void:
 			reverse_effect_amount = coold_down
 			coold_down -= potion.effect_amount
 			reverse_effect_amount -= coold_down
+		print("New cooldown: ", coold_down)
+		print("Cooldown Positive is drinked")
 		await get_tree().create_timer(potion.time_to_use).timeout
 		potion.potion_ended.emit(potion, reverse_effect_amount)
 	elif potion.potion == Potion.potion_type.COOLDOWN_NEGATIVE:
+		print("Old cooldown: ", coold_down)
 		var reverse_effect_amount: int = 0
 		if(potion.is_percents):
 			reverse_effect_amount = coold_down*(potion.effect_amount/100 +1)
@@ -284,18 +303,24 @@ func _on_potion_is_used(potion: Potion) -> void:
 		else:
 			reverse_effect_amount = potion.effect_amount
 			coold_down += potion.effect_amount
+		print("New cooldown: ", coold_down)
+		print("Cooldown Negative is drinked")
 		await get_tree().create_timer(potion.time_to_use).timeout
 		potion.potion_ended.emit(potion, reverse_effect_amount)
 	elif potion.potion == Potion.potion_type.HEAL_POSITIVE:
+		print("Old hp: ", hp)
 		if(potion.is_percents):
 			hp += hp*(potion.effect_amount/100 +1)
 		else:
 			hp += potion.effect_amount
+		print("New hp: ", hp)
 	elif potion.potion == Potion.potion_type.HEAL_NEGATIVE:
+		print("Old hp: ", hp)
 		if(potion.is_percents):
 			hp -= hp*(potion.effect_amount/100 +1)
 		else:
 			hp -= potion.effect_amount
+		print("New hp: ", hp)
 	elif potion.potion == Potion.potion_type.POWER_SLASH:
 		pass
 	elif potion.potion == Potion.potion_type.SLOW_SLASH:
@@ -311,6 +336,7 @@ func _on_potion_ended(potion: Potion, reverse_effect_amount: int) -> void:
 	var coold_down: int = 12
 	var plus_damage_to_next_attack: bool = false
 	var slow_play_to_next_attack: bool = false
+	print("Reverse effect is ", reverse_effect_amount)
 	if potion.potion == Potion.potion_type.SPEED_POSITIVE:
 		speed-=reverse_effect_amount
 	elif potion.potion == Potion.potion_type.SPEED_NEGATIVE:

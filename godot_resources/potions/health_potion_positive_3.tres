@@ -11,4 +11,4 @@ quality = 3
 icon = ExtResource("1_7lxlk")
 is_percents = false
 effect_amount = 2323
-time_to_use = 9
+time_to_use = 2

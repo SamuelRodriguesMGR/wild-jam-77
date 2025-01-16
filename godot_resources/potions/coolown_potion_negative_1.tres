@@ -10,5 +10,5 @@ potion = 5
 quality = null
 icon = ExtResource("1_6ukja")
 is_percents = null
-effect_amount = null
-time_to_use = null
+effect_amount = 5
+time_to_use = 2
