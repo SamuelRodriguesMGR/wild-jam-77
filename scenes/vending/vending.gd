@@ -21,9 +21,10 @@ extends StaticBody3D
 @export_range(0,100) var late_game_chance_lose_streak_quality_2: int = 50
 @export_range(0,100) var late_game_chance_lose_streak_quality_3: int = 30
 
-
+@onready var vending_diegetic_ui: VendingUI = %VendingDiegeticUi
 @onready var vending_animation_player: AnimationPlayer = %VendingAnimationPlayer
 @onready var area: Area3D = $InteractionArea
+
 var is_body_inside = false
 var bodies: Array[Node3D]
 var _interacted_player: Player
@@ -86,6 +87,13 @@ var paths_to_three_negative_quality_potions: Array[String] = [
 var _current_quality: int = 0
 var _gold_to_level_up_vending: int = 1
 
+func _ready() -> void:
+	for i: Node in get_tree().current_scene.get_children():
+		if(i is Player):
+			_interacted_player = i
+	vending_diegetic_ui.update_state(_calculate_chance(),_current_quality,_current_quality + 1,_gold_to_level_up_vending)
+	_interacted_player = null
+
 func _process(delta: float) -> void:
 	if(_is_turned_on):
 		bodies =  area.get_overlapping_bodies()
@@ -103,6 +111,7 @@ func _handle_spending_gold() -> void:
 					else:
 						_increase_quality_failure()
 					print("spend")
+				vending_diegetic_ui.update_state(_calculate_chance(),_current_quality,_current_quality + 1,_gold_to_level_up_vending)
 				_interacted_player = null
 
 func _handle_rolling_potion() -> void:
@@ -116,6 +125,7 @@ func _handle_rolling_potion() -> void:
 					_to_default_quality()
 				else:
 					_failed_to_roll()
+				vending_diegetic_ui.update_state(_calculate_chance(),_current_quality,_current_quality + 1,_gold_to_level_up_vending)
 				_interacted_player = null
 
 func _roll_vending() -> String:
@@ -188,6 +198,8 @@ func _increase_quality() -> void:
 		_gold_to_level_up_vending+=1
 	else:
 		_increase_quality_failure()
+	vending_diegetic_ui.update_state(_calculate_chance(),_current_quality,_current_quality + 1,_gold_to_level_up_vending)
+
 
 func _increase_quality_failure() -> void:
 	vending_animation_player.play("failure")
@@ -197,11 +209,16 @@ func _failed_to_roll() -> void:
 
 func _to_default_quality() -> void:
 	_current_quality = 0
+	_gold_to_level_up_vending = 1
+	vending_diegetic_ui.update_state(_calculate_chance(),_current_quality,_current_quality + 1,_gold_to_level_up_vending)
+
 
 func turn_on() -> void:
 	if(_is_turned_on == false):
 		_is_turned_on = !_is_turned_on
+		vending_diegetic_ui.show()
 
 func turn_off() -> void:
 	if(_is_turned_on == true):
 		_is_turned_on = !_is_turned_on
+		vending_diegetic_ui.hide()

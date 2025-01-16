@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 #Gameplay 
-var is_early_game: bool:
+var is_early_game: bool = true:
 	set(value):
 		if(value == true):
 			is_early_game = true

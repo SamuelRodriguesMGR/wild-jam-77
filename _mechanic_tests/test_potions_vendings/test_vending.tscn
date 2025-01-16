@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bivtd880fsqv1" path="res://assets/materials/floor.tres" id="1_1ndq7"]
 [ext_resource type="PackedScene" uid="uid://dwb7y5262shkn" path="res://scenes/Characters/dummy.tscn" id="2_7wa8s"]
-[ext_resource type="PackedScene" uid="uid://bsh7snhq88udy" path="res://scenes/vending.tscn" id="3_40uwq"]
+[ext_resource type="PackedScene" uid="uid://bsh7snhq88udy" path="res://scenes/vending/vending.tscn" id="3_40uwq"]
 [ext_resource type="PackedScene" uid="uid://b148v0hljqloo" path="res://scenes/Characters/character.tscn" id="4_mvg1i"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_daera"]

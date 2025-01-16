@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bivtd880fsqv1" path="res://assets/materials/floor.tres" id="1_esf5u"]
 [ext_resource type="PackedScene" uid="uid://dwb7y5262shkn" path="res://scenes/Characters/dummy.tscn" id="2_52wcd"]
-[ext_resource type="PackedScene" uid="uid://bsh7snhq88udy" path="res://scenes/vending.tscn" id="3_1s1lr"]
+[ext_resource type="PackedScene" uid="uid://bsh7snhq88udy" path="res://scenes/vending/vending.tscn" id="3_1s1lr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_daera"]
 sky_top_color = Color(0, 0.286275, 0.803922, 1)
