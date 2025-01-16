@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkhrfk7ywk1nl"]
+
+[ext_resource type="Script" path="res://scenes/vending/vending_diegetic_ui.gd" id="1_vo6fc"]
+
+[node name="VendingDiegeticUi" type="Node3D"]
+script = ExtResource("1_vo6fc")
+
+[node name="VendingLabel3D" type="Label3D" parent="."]
+unique_name_in_owner = true
+billboard = 1
+text = "35% to roll positive 1st tier POSITIVE potion
+\"R\" to spend 2 gold to upgrade tier
+\"Q\" to roll
+
+You cannot roll potion, spend at least 1 gold to roll POSITIVE potion with 35% chance!"
+font_size = 80

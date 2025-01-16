@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://b148v0hljqloo"]
+[gd_scene load_steps=28 format=3 uid="uid://b148v0hljqloo"]
 
 [ext_resource type="Script" path="res://scenes/Characters/character.gd" id="1_tyh0l"]
 [ext_resource type="Texture2D" uid="uid://cthqhwhjx6enb" path="res://assets/Character/spritesheet.png" id="2_aodx6"]
 [ext_resource type="Script" path="res://scenes/Characters/super_camera_3d.gd" id="2_qpnry"]
 [ext_resource type="Script" path="res://other_scripts/classes/HurtBox.gd" id="2_uv78p"]
 [ext_resource type="Script" path="res://other_scripts/classes/HitBox.gd" id="3_rghfa"]
+[ext_resource type="PackedScene" uid="uid://bg426csj280av" path="res://scenes/UI/potions_slots/potion_slots_ui.tscn" id="5_uoo61"]
 
 [sub_resource type="Animation" id="Animation_k1c36"]
 length = 0.001
@@ -416,6 +417,14 @@ modulate = Color(0.803922, 0.152941, 0.12549, 1)
 outline_modulate = Color(0.938919, 0.456999, 0.565816, 1)
 text = "12345"
 font_size = 80
+
+[node name="PotionSlotsUI" parent="." instance=ExtResource("5_uoo61")]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.864583
+anchor_top = 0.00308642
+anchor_bottom = 0.313272
+metadata/_edit_use_anchors_ = true
 
 [connection signal="timeout" from="Timers/attack_duration" to="." method="_on_attack_duration_timeout"]
 [connection signal="timeout" from="Timers/attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

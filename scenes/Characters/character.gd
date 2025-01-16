@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 
@@ -9,6 +10,7 @@ extends CharacterBody3D
 @onready var hurtbox_shape     : CollisionShape3D = $HurtBox/Collision
 @onready var info_label        : Label3D = $Info
 @onready var hp_label          : Label3D = $HP
+@onready var potion_slots_ui   : PotionSlotsUI = %PotionSlotsUI
 
 # таймеры
 @onready var attack_cooldown    : Timer = $Timers/attack_cooldown
@@ -17,6 +19,9 @@ extends CharacterBody3D
 @onready var transform_duration : Timer = $Timers/transform_duration
 
 @export var gold : int = 3
+#for tests
+@export var is_local: bool = false
+#
 
 const SPEED    : float = 12.0
 const FRICTION : float = 0.95
@@ -31,6 +36,9 @@ var anim_flag       : bool    = false
 var is_attack_ready    : bool = true
 var is_transform_ready : bool = true
 
+var is_on_lose_streak: bool = false
+
+var _potions_slots: PotionSlots
 
 func _enter_tree() -> void:
 	# уникальный id игрока (я хз)
@@ -38,17 +46,18 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	# если игрок авторизован
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() or is_local:
 		# имя
 		info_label.text = name
 		# делаем камеру повышенной в звании
 		camera.make_current()
 		# стартовая позиция
 		position.y = 1
+		_init_potions_slots()
 
 func _physics_process(_delta: float) -> void:
 	# если игрок авторизован
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() or is_local:
 		get_input()
 		move()
 		move_and_slide()
@@ -197,28 +206,17 @@ func mov_anim() -> void:
 	#
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+func _init_potions_slots() -> void:
+	_potions_slots = PotionSlots.new()
+	_potions_slots.potion_slots_updated.connect(potion_slots_ui._on_potion_slots_updated)
+	_potions_slots.potion_slots_updated.emit(_potions_slots.potions)
+
+func give_potion(path_to_potion_resource: String) -> void:
+	_potions_slots.put_potion_in(load(path_to_potion_resource))
+
+#Функция такая маленькая, потому что можно будет включать VFX.
+func put_out_gold(minus: int) -> bool:
+	if(gold-minus >= 0):
+		gold-=minus
+		return true
+	return false
