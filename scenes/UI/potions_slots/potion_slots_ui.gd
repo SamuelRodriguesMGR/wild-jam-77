@@ -31,7 +31,3 @@ func _swap_slots() -> void:
 	_slots.get_children()[0].move_child(_slots,1)
 	(_slots.get_children()[1] as PotionSlot).size_flags_stretch_ratio = 1.5
 	(_slots.get_children()[0] as PotionSlot).size_flags_stretch_ratio = 1.0
-	
-
-func _on_potion_ended(_potion: Potion):
-	pass

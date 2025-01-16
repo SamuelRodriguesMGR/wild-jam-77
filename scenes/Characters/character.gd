@@ -212,7 +212,124 @@ func _init_potions_slots() -> void:
 	_potions_slots.potion_slots_updated.emit(_potions_slots.potions)
 
 func give_potion(path_to_potion_resource: String) -> void:
-	_potions_slots.put_potion_in(load(path_to_potion_resource))
+	var duplicated_potion: Potion = load(path_to_potion_resource).duplicate(false)
+	duplicated_potion.potion_is_used.connect(_on_potion_is_used)
+	duplicated_potion.potion_ended.connect(_on_potion_ended)
+	_potions_slots.put_potion_in(duplicated_potion)
+
+func _on_potion_is_used(potion: Potion) -> void:
+	var speed: int = 10
+	var hp: int = 10
+	var attack_damage: int = 10
+	var coold_down: int = 12
+	var plus_damage_to_next_attack: bool = false
+	var slow_play_to_next_attack: bool = false
+	if potion.potion == Potion.potion_type.SPEED_POSITIVE:
+		var reverse_effect_amount: int = 0
+		if(potion.is_percents):
+			reverse_effect_amount = speed*(potion.effect_amount/100 +1)
+			speed+=reverse_effect_amount
+		else:
+			reverse_effect_amount = potion.effect_amount
+			speed+=potion.effect_amount
+		await get_tree().create_timer(potion.time_to_use).timeout
+		potion.potion_ended.emit(potion, reverse_effect_amount)
+	elif potion.potion == Potion.potion_type.SPEED_NEGATIVE:
+		var reverse_effect_amount: int = 0
+		if(potion.is_percents):
+			reverse_effect_amount = speed*(potion.effect_amount/100 +1)
+			speed-=reverse_effect_amount
+		else:
+			reverse_effect_amount = potion.effect_amount
+			speed-=potion.effect_amount
+		await get_tree().create_timer(potion.time_to_use).timeout
+		potion.potion_ended.emit(potion, reverse_effect_amount)
+	elif potion.potion == Potion.potion_type.POWER_POSITIVE:
+		var reverse_effect_amount: int = 0
+		if(potion.is_percents):
+			reverse_effect_amount = attack_damage*(potion.effect_amount/100 +1)
+			attack_damage+=reverse_effect_amount
+		else:
+			reverse_effect_amount = potion.effect_amount
+			attack_damage+=potion.effect_amount
+		await get_tree().create_timer(potion.time_to_use).timeout
+		potion.potion_ended.emit(potion, reverse_effect_amount)
+	elif potion.potion == Potion.potion_type.POWER_NEGATIVE:
+		var reverse_effect_amount: int = 0
+		if(potion.is_percents):
+			reverse_effect_amount = attack_damage*(potion.effect_amount/100 +1)
+			attack_damage-=reverse_effect_amount
+		else:
+			reverse_effect_amount = potion.effect_amount
+			attack_damage-=potion.effect_amount
+		await get_tree().create_timer(potion.time_to_use).timeout
+		potion.potion_ended.emit(potion, reverse_effect_amount)
+	elif potion.potion == Potion.potion_type.COOLDOWN_POSITIVE:
+		var reverse_effect_amount: int = 0
+		if(potion.is_percents):
+			reverse_effect_amount = coold_down
+			coold_down -= coold_down*(potion.effect_amount/100 +1)
+			reverse_effect_amount -= coold_down
+		else:
+			reverse_effect_amount = coold_down
+			coold_down -= potion.effect_amount
+			reverse_effect_amount -= coold_down
+		await get_tree().create_timer(potion.time_to_use).timeout
+		potion.potion_ended.emit(potion, reverse_effect_amount)
+	elif potion.potion == Potion.potion_type.COOLDOWN_NEGATIVE:
+		var reverse_effect_amount: int = 0
+		if(potion.is_percents):
+			reverse_effect_amount = coold_down*(potion.effect_amount/100 +1)
+			coold_down += reverse_effect_amount
+		else:
+			reverse_effect_amount = potion.effect_amount
+			coold_down += potion.effect_amount
+		await get_tree().create_timer(potion.time_to_use).timeout
+		potion.potion_ended.emit(potion, reverse_effect_amount)
+	elif potion.potion == Potion.potion_type.HEAL_POSITIVE:
+		if(potion.is_percents):
+			hp += hp*(potion.effect_amount/100 +1)
+		else:
+			hp += potion.effect_amount
+	elif potion.potion == Potion.potion_type.HEAL_NEGATIVE:
+		if(potion.is_percents):
+			hp -= hp*(potion.effect_amount/100 +1)
+		else:
+			hp -= potion.effect_amount
+	elif potion.potion == Potion.potion_type.POWER_SLASH:
+		pass
+	elif potion.potion == Potion.potion_type.SLOW_SLASH:
+		pass
+	else:
+		pass
+	potion.potion_is_used.disconnect(_on_potion_is_used)
+
+func _on_potion_ended(potion: Potion, reverse_effect_amount: int) -> void:
+	var speed: int = 10
+	var hp: int = 10
+	var attack_damage: int = 10
+	var coold_down: int = 12
+	var plus_damage_to_next_attack: bool = false
+	var slow_play_to_next_attack: bool = false
+	if potion.potion == Potion.potion_type.SPEED_POSITIVE:
+		speed-=reverse_effect_amount
+	elif potion.potion == Potion.potion_type.SPEED_NEGATIVE:
+		speed+=reverse_effect_amount
+	elif potion.potion == Potion.potion_type.POWER_POSITIVE:
+		attack_damage-=reverse_effect_amount
+	elif potion.potion == Potion.potion_type.POWER_NEGATIVE:
+		attack_damage+=reverse_effect_amount
+	elif potion.potion == Potion.potion_type.COOLDOWN_POSITIVE:
+		coold_down+=reverse_effect_amount
+	elif potion.potion == Potion.potion_type.COOLDOWN_NEGATIVE:
+		coold_down-=reverse_effect_amount
+	elif potion.potion == Potion.potion_type.POWER_SLASH:
+		pass
+	elif potion.potion == Potion.potion_type.SLOW_SLASH:
+		pass
+	else:
+		pass
+	potion.potion_ended.disconnect(_on_potion_ended)
 
 #Функция такая маленькая, потому что можно будет включать VFX.
 func put_out_gold(minus: int) -> bool:

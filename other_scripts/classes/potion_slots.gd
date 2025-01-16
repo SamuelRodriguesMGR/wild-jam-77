@@ -19,13 +19,12 @@ func _init() -> void:
 func _ready() -> void:
 	potion_slots_updated.emit(potions)
 
-##Example of use: portions_slots.put_potion_in("res://godot_resources/potions/coolown_potion_negative_2.tres")
+##Example of use: portions_slots.put_potion_in(load("res://godot_resources/potions/coolown_potion_negative_2.tres"))
 func put_potion_in(potion: Potion) -> void:
-	var duplicated_potion: Potion = potion.duplicate(false)
 	if(potions.size() == pointer_on_last_potion):
-		potions[_slots_size-1] = duplicated_potion
+		potions[_slots_size-1] = potion
 	else:
-		potions[pointer_on_last_potion] = duplicated_potion
+		potions[pointer_on_last_potion] = potion
 		pointer_on_last_potion+=1
 	potion_slots_updated.emit(potions)
 
@@ -48,6 +47,5 @@ func drink_potion() -> void:
 		if(potions[i].potion == Potion.potion_type.NULL):
 			continue
 		else:
-			_put_potion_out()
 			potions[i].potion_is_used.emit(potions[i])
-			potions[i].is_being_used = true
+			_put_potion_out()
