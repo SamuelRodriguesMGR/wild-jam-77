@@ -83,3 +83,4 @@ shape = SubResource("BoxShape3D_806a7")
 [node name="Character" parent="." instance=ExtResource("4_mvg1i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16966, 0)
 gold = 6
+is_local = true
