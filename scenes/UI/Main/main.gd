@@ -15,3 +15,11 @@ func _on_host_button_pressed() -> void:
 # Client
 func _on_join_button_pressed() -> void:
 	_change_scene("client")
+
+# Это будующее меню
+func _on_join_client_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/Main/main_clients.tscn")
+
+
+func _on_host_new_server_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/UI/Main/main_hosts.tscn")
