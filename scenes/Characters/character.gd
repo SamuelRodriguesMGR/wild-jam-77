@@ -47,7 +47,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	
-	if !is_multiplayer_authority():
+	if is_multiplayer_authority():
 
 		# движение
 		if not anim_flag:
