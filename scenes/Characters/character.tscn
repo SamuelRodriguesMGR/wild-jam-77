@@ -391,7 +391,6 @@ script = ExtResource("3_rghfa")
 damage = 30
 
 [node name="Shape" type="CollisionShape3D" parent="HitBox"]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -1.7)
 shape = SubResource("BoxShape3D_oi0bf")
 disabled = true
 
@@ -430,3 +429,4 @@ metadata/_edit_use_anchors_ = true
 [connection signal="timeout" from="Timers/attack_cooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="timeout" from="Timers/transform_duration" to="." method="_on_transform_duration_timeout"]
 [connection signal="timeout" from="Timers/transform_cooldown" to="." method="_on_transform_cooldown_timeout"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_area_entered"]
