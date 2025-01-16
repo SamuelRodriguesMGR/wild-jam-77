@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 
@@ -33,6 +34,8 @@ var is_transform_ready:bool = true
 
 var _potions_slots: PotionSlots
 
+var is_on_lose_streak: bool = false
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
@@ -44,7 +47,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	
-	if is_multiplayer_authority():
+	if !is_multiplayer_authority():
 
 		# движение
 		if not anim_flag:
@@ -183,6 +186,13 @@ func _init_potions_slots() -> void:
 	_potions_slots.potion_slots_updated.connect(potion_slots_ui._on_potion_slots_updated)
 	_potions_slots.potion_slots_updated.emit(_potions_slots.potions)
 
+#Функция такая маленькая, потому что можно будет включать VFX.
+func put_out_gold(minus: int) -> bool:
+	if(gold-minus >= 0):
+		gold-=minus
+		return true
+	return false
+
 ##Example of use: give_potion("res://godot_resources/potions/coolown_potion_negative_2.tres")
-func give_potion(potion: Potion) -> void:
-	_potions_slots.put_potion_in(potion)
+func give_potion(path_to_potion_resource: String) -> void:
+	_potions_slots.put_potion_in(load(path_to_potion_resource))
