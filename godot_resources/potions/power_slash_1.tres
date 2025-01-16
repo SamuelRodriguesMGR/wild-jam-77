@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://c0su0o3il5i8d"]
 
-[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="1_hexxa"]
+[ext_resource type="Texture2D" uid="uid://5uknss55ujl1" path="res://assets/potions/pos/1lvl/power_slash_positive_1.png" id="1_dm1bx"]
 [ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_cghn8"]
 
 [resource]
@@ -8,7 +8,7 @@ resource_local_to_scene = true
 script = ExtResource("2_cghn8")
 potion = 10
 quality = 1
-icon = ExtResource("1_hexxa")
+icon = ExtResource("1_dm1bx")
 is_percents = false
 effect_amount = 5
 time_to_use = 2

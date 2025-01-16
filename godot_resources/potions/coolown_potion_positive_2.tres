@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://17yqw5yhcgoc"]
 
-[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="1_lqwdn"]
+[ext_resource type="Texture2D" uid="uid://83nlugt2v84" path="res://assets/potions/pos/2lvl/cooldown_positive_2.png" id="1_o2ytc"]
 [ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_b2wg7"]
 
 [resource]
@@ -8,7 +8,7 @@ resource_local_to_scene = true
 script = ExtResource("2_b2wg7")
 potion = 4
 quality = 2
-icon = ExtResource("1_lqwdn")
+icon = ExtResource("1_o2ytc")
 is_percents = false
 effect_amount = 5
 time_to_use = 2

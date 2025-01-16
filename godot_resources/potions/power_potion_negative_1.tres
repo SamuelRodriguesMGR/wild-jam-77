@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://b7tkk2gr7rlf6"]
 
-[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="1_xohjk"]
+[ext_resource type="Texture2D" uid="uid://drquuejqupcnx" path="res://assets/potions/neg/1lvl/power_negative_1.png" id="1_1t72w"]
 [ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_tpeqh"]
 
 [resource]
@@ -8,7 +8,7 @@ resource_local_to_scene = true
 script = ExtResource("2_tpeqh")
 potion = 5
 quality = 1
-icon = ExtResource("1_xohjk")
+icon = ExtResource("1_1t72w")
 is_percents = false
 effect_amount = 5
 time_to_use = 2

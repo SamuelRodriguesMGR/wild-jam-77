@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://t2dh0qq76eyu"]
 
-[ext_resource type="Texture2D" uid="uid://cpogn6f3hruh3" path="res://assets/images/dummy.png" id="1_3f4hu"]
+[ext_resource type="Texture2D" uid="uid://bq7u380dvxya7" path="res://assets/potions/pos/3lvl/speed_positive_3.png" id="1_s1dtv"]
 [ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_37fef"]
 
 [resource]
@@ -8,7 +8,7 @@ resource_local_to_scene = true
 script = ExtResource("2_37fef")
 potion = 0
 quality = 3
-icon = ExtResource("1_3f4hu")
+icon = ExtResource("1_s1dtv")
 is_percents = false
 effect_amount = 5
 time_to_use = 2

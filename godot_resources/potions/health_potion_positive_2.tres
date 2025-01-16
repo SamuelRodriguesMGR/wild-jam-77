@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Potion" load_steps=3 format=3 uid="uid://crksc7k3vfo7e"]
 
-[ext_resource type="Texture2D" uid="uid://gempdrf23tq1" path="res://_mechanic_tests/debug_assets/test_health_2.png" id="1_ekf27"]
+[ext_resource type="Texture2D" uid="uid://l1w2v76p2uyy" path="res://assets/potions/pos/2lvl/heal_positive_2.png" id="1_bp56j"]
 [ext_resource type="Script" path="res://godot_resources/resource_scripts/potion.gd" id="2_lybjy"]
 
 [resource]
@@ -8,7 +8,7 @@ resource_local_to_scene = true
 script = ExtResource("2_lybjy")
 potion = 8
 quality = 2
-icon = ExtResource("1_ekf27")
+icon = ExtResource("1_bp56j")
 is_percents = false
 effect_amount = 333
 time_to_use = 2
