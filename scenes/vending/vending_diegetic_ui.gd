@@ -25,7 +25,7 @@ func _ready() -> void:
 	key_string_to_spend = _get_first_key_string_for_action("spend_money_to_vending")
 	key_string_to_roll = _get_first_key_string_for_action("roll_potion")
 
-func update_state(chance: int, current_quality: int, next_quality: int, money_cost: int) -> void:
+func update_state(chance: int, current_quality: int, _next_quality: int, money_cost: int) -> void:
 	var style_chance: String = str(chance) + "%"
 	var quality_str: String
 	if(current_quality == 1):
